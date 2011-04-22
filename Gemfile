@@ -23,7 +23,12 @@ gem 'coffee-script'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test do
-  # Pretty printed test output
-  gem 'turn', :require => false
+group :development, :test do
+  gem 'rspec-rails', '~> 2.3'
 end
+
+group :test do
+  gem 'cucumber-rails'
+  gem 'capybara'
+end
+
