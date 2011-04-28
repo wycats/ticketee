@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :find_project, :only => [:show, :edit, :update, :destroy]
+
   def index
     @projects = Project.scoped
   end
@@ -18,12 +20,9 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:id])
-
     if @project.update_attributes(params[:project])
       redirect_to @project, :notice => "Project has been updated."
     else
@@ -33,12 +32,19 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
   end
 
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
     redirect_to projects_path, :notice => "Project has been deleted."
+  end
+
+private
+  def find_project
+    @project = Project.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "The project you were looking" +
+                    " for could not be found."
+    redirect_to projects_path
   end
 end
