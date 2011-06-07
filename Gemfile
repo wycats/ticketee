@@ -15,6 +15,8 @@ gem 'sass', '~> 3.1.0.alpha'
 gem 'coffee-script'
 gem 'dynamic_form'
 
+gem 'devise'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
